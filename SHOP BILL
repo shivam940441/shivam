@@ -1,0 +1,43 @@
+#include <stdio.h>
+
+int main() {
+    
+      int n, i, qty; 
+    char itemName[50]; 
+    float price, total = 0, cost; 
+ 
+    printf("---- WELCOME TO SPORT COMPLEX ----\n"); 
+ 
+    printf("........... number of items:........... "); 
+    scanf("%d", &n); 
+ 
+    printf("\n---------------  Item Details ---------------\n"); 
+ 
+    for(i = 1; i <= n; i++) { 
+        printf("\n name of item %d: ", i); 
+        scanf("%s", itemName); 
+ 
+        printf(" price of %s: ", itemName); 
+        scanf("%f", &price); 
+ 
+        printf(" quantity of %s: ", itemName); 
+        scanf("%d", &qty); 
+ 
+        cost = price * qty; 
+        total += cost; 
+ 
+        printf("Item: %s \n Price: %.f \n Quantity: %d \n Total: %.f\n", itemName, 
+price, qty, cost); 
+} 
+ 
+    printf("\n----------------------------\n"); 
+    printf("Grand Total Bill = %.f\n", total); 
+    printf("----------------------------\n"); 
+    printf("Thank you visit again\n"); 
+ 
+    
+
+
+
+    return 0;
+}
