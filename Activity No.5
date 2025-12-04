@@ -1,0 +1,128 @@
+#include <stdio.h>
+
+struct Student {
+    int roll;
+    char name[50];
+    float marks;
+};
+
+void addStudent(struct Student stu[], int *n) {
+    printf("\nEnter details of student %d\n", *n + 1);
+
+    printf("Roll Number: ");
+    scanf("%d", &stu[*n].roll);
+
+    printf("Name: ");
+    scanf("%49s", stu[*n].name);
+
+    printf("Marks: ");
+    scanf("%f", &stu[*n].marks);
+
+    (*n)++;
+    printf("Student added successfully!\n");
+}
+
+void displayStudents(struct Student stu[], int n) {
+    if (n == 0) {
+        printf("\nNo students to display.\n");
+        return;
+    }
+
+    printf("\n--- Student List ---\n");
+    for (int i = 0; i < n; i++) {
+        printf("\nStudent %d:\n", i + 1);
+        printf("Roll : %d\n", stu[i].roll);
+        printf("Name : %s\n", stu[i].name);
+        printf("Marks: %.2f\n", stu[i].marks);
+    }
+}
+
+void sortStudents(struct Student stu[], int n) {
+    struct Student temp;
+
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = i + 1; j < n; j++) {
+
+                       if (stu[i].marks < stu[j].marks) {
+                temp = stu[i];
+                stu[i] = stu[j];
+                stu[j] = temp;
+            }
+                     else if (stu[i].marks == stu[j].marks && stu[i].roll > stu[j].roll) {
+                temp = stu[i];
+                stu[i] = stu[j];
+                stu[j] = temp;
+            }
+        }
+    }
+
+    printf("\nStudents sorted successfully!\n");
+}
+
+void searchStudent(struct Student stu[], int n) {
+    int r, found = 0;
+
+    if (n == 0) {
+        printf("\nNo students available to search.\n");
+        return;
+    }
+
+    printf("Enter roll number to search: ");
+    scanf("%d", &r);
+
+    for (int i = 0; i < n; i++) {
+        if (stu[i].roll == r) {
+            printf("\n--- Student Found ---\n");
+            printf("Roll : %d\n", stu[i].roll);
+            printf("Name : %s\n", stu[i].name);
+            printf("Marks: %.2f\n", stu[i].marks);
+            found = 1;
+            break;
+        }
+    }
+
+    if (!found)
+        printf("\nStudent not found!\n");
+}
+
+int main() {
+    struct Student stu[100];
+    int n = 0, choice;
+
+    while (1) {
+        printf("\n\n--- MENU ---\n");
+        printf("1. Add Student\n");
+        printf("2. Display Students\n");
+        printf("3. Sort Students\n");
+        printf("4. Search Student\n");
+        printf("5. Exit\n");
+
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                addStudent(stu, &n);
+                break;
+
+            case 2:
+                displayStudents(stu, n);
+                break;
+
+            case 3:
+                sortStudents(stu, n);
+                break;
+
+            case 4:
+                searchStudent(stu, n);
+                break;
+
+            case 5:
+                printf("Exiting program. Goodbye!\n");
+                return 0;
+
+            default:
+                printf("Invalid choice! Please try again.\n");
+        }
+    }
+}
