@@ -1,0 +1,22 @@
+#include <stdio.h>
+
+int water(int *day) {
+    if (*day > 10) {
+        return 0;
+    }
+
+    int glasses;
+    printf("Enter glasses for Day %d: ", *day);
+    scanf("%d", &glasses);
+
+    (*day)++;
+
+    return glasses + water(day);
+}
+
+int main() {
+    int day = 1;
+    int total = water(&day);
+    printf("Total water in 10 days = %d\n", total);
+    return 0;
+}
